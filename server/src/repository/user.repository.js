@@ -26,7 +26,12 @@ async function deleteUserDB(_id) {
     await Table.deleteOne({ _id: new ObjectId(_id) });
     const data = await Table.find();
     return data;
+};
+
+async function getByIdEmail(email){
+    const data = await Table.find({email:email});
+    return data;
 }
 
 
-module.exports = { getAllUserDB, getByIdUserDB, createUserDB, updateUserDB, deleteUserDB };
+module.exports = { getAllUserDB, getByIdUserDB, createUserDB, updateUserDB, deleteUserDB, getByIdEmail};

@@ -1,4 +1,4 @@
-const { getAllUserDB, getByIdUserDB, createUserDB, updateUserDB, deleteUserDB } = require("../repository/user.repository");
+const { getAllUserDB, getByIdUserDB, createUserDB, updateUserDB, deleteUserDB, getByIdEmail } = require("../repository/user.repository");
 
 
 async function getAllUser() {
@@ -12,6 +12,10 @@ async function getByIdUser(_id) {
 };
 
 async function createUser(user) {
+    const found = await getByIdEmail(user.email)
+
+    if (found.length) throw new Error('error, already exists ');
+
     const data = await createUserDB(user);
     return data;
 };
