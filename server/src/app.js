@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+
 const routeUser = require('./controller/user.controller');
 
 const app = express();

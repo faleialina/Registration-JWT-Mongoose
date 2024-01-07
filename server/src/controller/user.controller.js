@@ -1,6 +1,6 @@
 const express = require('express');
 const { generateToken } = require('../helper/jwt');
-const { getAllUser, getByIdUser, createUser, updateUser, deleteUser } = require('../service/user.service');
+const { getAllUser, getByIdUser, createUser, updateUser, deleteUser, getAuth } = require('../service/user.service');
 const route = express.Router();
 
 
@@ -26,7 +26,7 @@ route.post('/', async (req, res) => {
     try {
         const data = await createUser(req.body);
 
-        const token = generateToken()
+        const token = generateToken(data[data.length - 1]);
 
         res.cookie('Bearer', token);
 
@@ -35,6 +35,21 @@ route.post('/', async (req, res) => {
         res.send(error.message);
     }
 });
+
+route.post('/auth', async (req, res) => {
+    try {
+        const data = await getAuth(req.body);
+
+        const token = generateToken(data[0]);
+
+        res.cookie('Bearer', token);
+
+        res.send(data);
+    } catch (error) {
+        res.send(error.message);
+    }
+});
+
 
 route.put('/:_id', async (req, res) => {
     try {

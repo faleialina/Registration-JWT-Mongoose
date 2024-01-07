@@ -1,7 +1,7 @@
 const jsonwebtoken = require('jsonwebtoken');
 
-function generateToken() {
-    const token = jsonwebtoken.sign({}, 'testik');
+function generateToken(data) {
+    const token = jsonwebtoken.sign(JSON.stringify(data), 'testik');
     return token;
 };
 

@@ -28,10 +28,10 @@ async function deleteUserDB(_id) {
     return data;
 };
 
-async function getByIdEmail(email){
-    const data = await Table.find({email:email});
+async function getByIdEmail(email) {
+    const data = await Table.find({ email: email });
     return data;
 }
 
 
-module.exports = { getAllUserDB, getByIdUserDB, createUserDB, updateUserDB, deleteUserDB, getByIdEmail};
+module.exports = { getAllUserDB, getByIdUserDB, createUserDB, updateUserDB, deleteUserDB, getByIdEmail };
