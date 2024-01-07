@@ -1,4 +1,5 @@
 const express = require('express');
+const { generateToken } = require('../helper/jwt');
 const { getAllUser, getByIdUser, createUser, updateUser, deleteUser } = require('../service/user.service');
 const route = express.Router();
 
@@ -24,6 +25,11 @@ route.get('/:_id', async (req, res) => {
 route.post('/', async (req, res) => {
     try {
         const data = await createUser(req.body);
+
+        const token = generateToken()
+
+        res.cookie('Bearer', token);
+
         res.send(data);
     } catch (error) {
         res.send(error.message);
